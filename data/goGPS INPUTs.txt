@@ -1,0 +1,407 @@
+#--------------------------------------------------------------------------------
+[PROJECT]
+#--------------------------------------------------------------------------------
+# Name of the project
+prj_name = "Default DD project"
+# Home of the project
+prj_home = "..\data\project\default_DD"
+
+#--------------------------------------------------------------------------------
+[DEPRECATE]
+#--------------------------------------------------------------------------------
+# Deprecate ini - path - it contains some legacy setting (now imported in the new settings system)
+# [ WW ] if not empty the system will import its parameter overriding the one written in here
+input_file_ini_path = ""
+
+#--------------------------------------------------------------------------------
+[RECEIVER_FILES]
+#--------------------------------------------------------------------------------
+# "sss_" parameters define the session of observation, they are used to substitute special keywords in file names
+# Working session - first data of observation to consider (yyyy-mm-dd <HH:MM:SS>)
+# mainly used to detect the name of the file to process
+sss_date_start = "2019-09-02 00:00:00"
+# Working session - last data of observation to consider (yyyy-mm-dd <HH:MM:SS>)
+sss_date_stop = "2019-09-02 23:55:00"
+# Id character sequence to be use for the session $(S) special keyword (e.g. "01233456789ABCabc")
+sss_id_list = "0"
+# First session id (char of sss_id_list)
+sss_id_start = "0"
+# Last session id (char of sss_id_list)
+sss_id_stop = "0"
+
+# Special Keywords that can be used in file names:
+#  - ${WWWW} 4 char GPS week
+#  - ${WWWWD} 4+1 char GPS week + day of the week
+#  - ${D} 1 char day of the week
+#  - ${HH} 2 char GPS hour
+#  - ${6H} 2 char GPS hour (00, 06, 12, 18)
+#  - ${YY} 2 char GPS year
+#  - ${YYYY} 4 char GPS year
+#  - ${DOY} 3 char GPS day of the year
+#  - ${S} 1 char session
+
+# Directory containing the data (static)
+obs_dir = "RINEX"
+# File name of the receivers (can contain special keywords)
+obs_name = ["LISAGA2_5m.19o" "02bolga_5m.19o"]
+# Array of observations type (0: Target, 1: Master, 2: SEID reference)
+obs_type = [1 0]
+
+# Directory of PCO - PCV antex (ATX) files
+atx_dir = "..\..\antenna\ATX"
+# PCO - PCV antex (ATX) file
+atx_name = "igs14_1941.atx"
+
+#--------------------------------------------------------------------------------
+[GEOMETRY]
+#--------------------------------------------------------------------------------
+# When using multiple receivers it is possible to set the relative position of each
+# receiver w.r.t. a local reference frame
+# Positions are expressed in a XYZ RF as an array "xyz_ant_${NN}" where $NN is
+# the (target) receiver number (as ordered in obs_name) starting from 01
+xyz_ant_01 = [0 0 0]
+# Indicate the "baricenter" of the structure -> evaluation point
+xyz_ev_point = [0 0 0]
+
+#--------------------------------------------------------------------------------
+[COMPUTATION_CENTER]
+#--------------------------------------------------------------------------------
+# List of the computeation center to be used for ephemeris retrival
+# Every product is searched locally, when not found is downloaded
+# When the file is not found, the system fall back on the next available
+
+# Preferred list of web archives,
+# accepted values: "cddis" "custom"
+preferred_archive = ["cddis" "igscb" "custom"]
+# Preferred source for GPS only solution, 
+# accepted values: "igs" "cod" "jpl" "esa" "emx" "gbm"
+preferred_gps = ["igs" "emx" "gbm"]
+# Preferred source for GPS/GLONASS only solution,
+# accepted values: "igs" "cod" "esa" "emx" "gbm"
+preferred_glo = ["igs" "emx" "gbm"]
+# Preferred source for Multiconstellation solution,
+# accepted values: "gbm"
+preferred_mxd = ["gbm"]
+# Preferred ephemeris type, valid only for source "igs",
+# accepted values: "final" "rapid" "ultra" "broadcast"
+preferred_eph = ["final" "rapid" "ultra" "broadcast"]
+# Preferred Earth rotation parameters type, rapid are not always available,
+# accepted values: "final" "rapid" "ultra"
+preferred_erp = ["final" "rapid" "ultra"]
+# Preferred clock types, valid but for "igs" glonass,
+# accepted values: "clk_05s" "clk_30s" "clk"
+preferred_clk = ["clk_30s" "clk"]
+
+# A custom center/product can also be used
+# (all the fields are strings)
+custom_addr = "cddis.gsfc.nasa.gov\"
+custom_port = "21"
+custom_path = "pub\gps\products\${WWWW}\"
+# The "variable" part of the path should be in the name, e.g. ${WWWW}/igs${WWWWD}.sp3
+custom_name_eph = "igs${WWWWD}.sp3"
+custom_name_clk = "igs${WWWWD}.clk_30s"
+custom_name_erp = "igs${WWWWD}.erp"
+
+#--------------------------------------------------------------------------------
+[INPUT_SATELLITE]
+#--------------------------------------------------------------------------------
+# Directory of Ephemeris files
+eph_dir = "RINEX"
+# Name of Ephemeris files - special keywords can be used
+# If not found, goGPS will try to download them following COMPUTATION_CENTER section
+eph_name = "LISAGA2.19n"
+
+# Directory of clock offset files
+clk_dir = "RINEX"
+# If not found, goGPS will try to download them following COMPUTATION_CENTER section
+# Name of clock offset files - special keywords can be used
+clk_name = "igs20691.clk"
+
+# Directory of CRX files (containing satellite problems)
+crx_dir = "..\..\satellite\CRX"
+
+# Directory of DCB files (Differential Code Biases)
+dcb_dir = "..\..\satellite\DCB"
+
+# Directory of EMS files (EGNOS Message Server).
+ems_dir = "..\..\satellite\SBAS\EMS"
+
+#--------------------------------------------------------------------------------
+[INPUT_STATIONS]
+#--------------------------------------------------------------------------------
+# Directory of coordinates files
+crd_dir = "..\..\station\CRD"
+# Name of coordinates (CRD) file
+crd_name = ""
+# Directory of meteorological data
+met_dir = "..\..\station\MET"
+# Meteorological file
+met_name = ""
+# Directory of ocean loading files
+ocean_dir = "..\..\station\ocean"
+# Name of ocean loading file
+ocean_name = "ocean_loading.blq"
+
+#--------------------------------------------------------------------------------
+[INPUT_REFERENCE]
+#--------------------------------------------------------------------------------
+# Directory of Earth rotation/orientation parameters (ERP) files
+erp_dir = "..\..\reference\ERP"
+# If not found, goGPS will try to download them following COMPUTATION_CENTER section
+# Name of ERP files - special keywords can be used
+erp_name = "igu${WWWWD}_${6H}.erp"
+# Directory of Geoid files
+geoid_dir = "..\..\reference\geoid"
+# Filename in Geoid dir containing the map of ondulation of the geoid
+geoid_name = "geoid_EGM2008_05.mat"
+# Directory of DTM data
+dtm_dir = "..\..\reference\dtm"
+# File containing a graph of path constraints
+ref_graph_file = ""
+
+#--------------------------------------------------------------------------------
+[INPUT_UI]
+#--------------------------------------------------------------------------------
+# Directory of images for UI
+img_dir = "..\..\img"
+# Path to the image of the logo 64x64 px
+
+#--------------------------------------------------------------------------------
+[OUTPUT]
+#--------------------------------------------------------------------------------
+
+# Base dir that is going to store the ouput data files
+out_dir = "out"
+# Prefix ("name") to add to the output (can contain special keywords / subfolders)
+out_prefix = "BLG2_SAAS"
+# Current run number, when empty it will be automatically updated to avoid overwrite
+# the run_counter value is added as a 3 digit number to the output file name (after the prefix)
+# WARNING: when set it will be used, and can cause overwrites
+run_counter = 
+
+# Flag to export positions results
+flag_out_position = 1
+# Flag to export the used settings as ini file
+flag_out_settings = 0
+# Flag to write the PDF report
+flag_out_pdf_report = 0
+# Flag to export PDF troposphere results (when available)
+flag_out_pdf_tropo = 0
+# Flag to write the PDF of the code residuals
+flag_out_pdf_code_res = 0
+# Flag to write the PDF of the phase residuals
+flag_out_pdf_ph_res = 0
+# Flag to write the PDF of the estimated dt
+flag_out_pdf_dt = 0
+# Flag to export the object that coputed the block solution (if computed)
+flag_out_block_obj = 0
+# Flag to export the KML file (when expected)
+flag_out_kml = 0
+# Flag to export the NMEA file (when expected)
+flag_out_nmea = 0
+
+
+=========================================================================================================================================
+=========================================================================================================================================
+
+#--------------------------------------------------------------------------------
+[PROJECT]
+#--------------------------------------------------------------------------------
+# Name of the project
+prj_name = "Default DD project"
+# Home of the project
+prj_home = "..\data\project\default_DD"
+
+#--------------------------------------------------------------------------------
+[DEPRECATE]
+#--------------------------------------------------------------------------------
+# Deprecate ini - path - it contains some legacy setting (now imported in the new settings system)
+# [ WW ] if not empty the system will import its parameter overriding the one written in here
+input_file_ini_path = ""
+
+#--------------------------------------------------------------------------------
+[RECEIVER_FILES]
+#--------------------------------------------------------------------------------
+# "sss_" parameters define the session of observation, they are used to substitute special keywords in file names
+# Working session - first data of observation to consider (yyyy-mm-dd <HH:MM:SS>)
+# mainly used to detect the name of the file to process
+sss_date_start = "2019-09-01 00:00:00"
+# Working session - last data of observation to consider (yyyy-mm-dd <HH:MM:SS>)
+sss_date_stop = "2019-09-01 23:55:00"
+# Id character sequence to be use for the session $(S) special keyword (e.g. "01233456789ABCabc")
+sss_id_list = "0"
+# First session id (char of sss_id_list)
+sss_id_start = "0"
+# Last session id (char of sss_id_list)
+sss_id_stop = "0"
+
+# Special Keywords that can be used in file names:
+#  - ${WWWW} 4 char GPS week
+#  - ${WWWWD} 4+1 char GPS week + day of the week
+#  - ${D} 1 char day of the week
+#  - ${HH} 2 char GPS hour
+#  - ${6H} 2 char GPS hour (00, 06, 12, 18)
+#  - ${YY} 2 char GPS year
+#  - ${YYYY} 4 char GPS year
+#  - ${DOY} 3 char GPS day of the year
+#  - ${S} 1 char session
+
+# Directory containing the data (static)
+obs_dir = "RINEX"
+# File name of the receivers (can contain special keywords)
+obs_name = ["LISAGA1_5m.19o" "LISAGTAD1_5m.19o"]
+# Array of observations type (0: Target, 1: Master, 2: SEID reference)
+obs_type = [1 0]
+
+# Directory of PCO - PCV antex (ATX) files
+atx_dir = "..\..\antenna\ATX"
+# PCO - PCV antex (ATX) file
+atx_name = "igs14_1941.atx"
+
+#--------------------------------------------------------------------------------
+[GEOMETRY]
+#--------------------------------------------------------------------------------
+# When using multiple receivers it is possible to set the relative position of each
+# receiver w.r.t. a local reference frame
+# Positions are expressed in a XYZ RF as an array "xyz_ant_${NN}" where $NN is
+# the (target) receiver number (as ordered in obs_name) starting from 01
+xyz_ant_01 = [0 0 0]
+# Indicate the "baricenter" of the structure -> evaluation point
+xyz_ev_point = [0 0 0]
+
+#--------------------------------------------------------------------------------
+[COMPUTATION_CENTER]
+#--------------------------------------------------------------------------------
+# List of the computeation center to be used for ephemeris retrival
+# Every product is searched locally, when not found is downloaded
+# When the file is not found, the system fall back on the next available
+
+# Preferred list of web archives,
+# accepted values: "cddis" "custom"
+preferred_archive = ["cddis" "igscb" "custom"]
+# Preferred source for GPS only solution, 
+# accepted values: "igs" "cod" "jpl" "esa" "emx" "gbm"
+preferred_gps = ["igs" "emx" "gbm"]
+# Preferred source for GPS/GLONASS only solution,
+# accepted values: "igs" "cod" "esa" "emx" "gbm"
+preferred_glo = ["igs" "emx" "gbm"]
+# Preferred source for Multiconstellation solution,
+# accepted values: "gbm"
+preferred_mxd = ["gbm"]
+# Preferred ephemeris type, valid only for source "igs",
+# accepted values: "final" "rapid" "ultra" "broadcast"
+preferred_eph = ["final" "rapid" "ultra" "broadcast"]
+# Preferred Earth rotation parameters type, rapid are not always available,
+# accepted values: "final" "rapid" "ultra"
+preferred_erp = ["final" "rapid" "ultra"]
+# Preferred clock types, valid but for "igs" glonass,
+# accepted values: "clk_05s" "clk_30s" "clk"
+preferred_clk = ["clk_30s" "clk"]
+
+# A custom center/product can also be used
+# (all the fields are strings)
+custom_addr = "cddis.gsfc.nasa.gov\"
+custom_port = "21"
+custom_path = "pub\gps\products\${WWWW}\"
+# The "variable" part of the path should be in the name, e.g. ${WWWW}/igs${WWWWD}.sp3
+custom_name_eph = "igs${WWWWD}.sp3"
+custom_name_clk = "igs${WWWWD}.clk_30s"
+custom_name_erp = "igs${WWWWD}.erp"
+
+#--------------------------------------------------------------------------------
+[INPUT_SATELLITE]
+#--------------------------------------------------------------------------------
+# Directory of Ephemeris files
+eph_dir = "RINEX"
+# Name of Ephemeris files - special keywords can be used
+# If not found, goGPS will try to download them following COMPUTATION_CENTER section
+eph_name = "brdm${DOY}0.${YY}p"
+
+# Directory of clock offset files
+clk_dir = "RINEX"
+# If not found, goGPS will try to download them following COMPUTATION_CENTER section
+# Name of clock offset files - special keywords can be used
+clk_name = "igs${WWWWD}.clk_30s"
+
+# Directory of CRX files (containing satellite problems)
+crx_dir = "..\..\satellite\CRX"
+
+# Directory of DCB files (Differential Code Biases)
+dcb_dir = "..\..\satellite\DCB"
+
+# Directory of EMS files (EGNOS Message Server).
+ems_dir = "..\..\satellite\SBAS\EMS"
+
+#--------------------------------------------------------------------------------
+[INPUT_STATIONS]
+#--------------------------------------------------------------------------------
+# Directory of coordinates files
+crd_dir = "..\..\station\CRD"
+# Name of coordinates (CRD) file
+crd_name = ""
+# Directory of meteorological data
+met_dir = "..\..\station\MET"
+# Meteorological file
+met_name = ""
+# Directory of ocean loading files
+ocean_dir = "..\..\station\ocean"
+# Name of ocean loading file
+ocean_name = "ocean_loading.blq"
+
+#--------------------------------------------------------------------------------
+[INPUT_REFERENCE]
+#--------------------------------------------------------------------------------
+# Directory of Earth rotation/orientation parameters (ERP) files
+erp_dir = "..\..\reference\ERP"
+# If not found, goGPS will try to download them following COMPUTATION_CENTER section
+# Name of ERP files - special keywords can be used
+erp_name = "igs00p03.erp"
+# Directory of Geoid files
+geoid_dir = "..\..\reference\geoid"
+# Filename in Geoid dir containing the map of ondulation of the geoid
+geoid_name = "geoid_EGM2008_05.mat"
+# Directory of DTM data
+dtm_dir = "..\..\reference\dtm"
+# File containing a graph of path constraints
+ref_graph_file = ""
+
+#--------------------------------------------------------------------------------
+[INPUT_UI]
+#--------------------------------------------------------------------------------
+# Directory of images for UI
+img_dir = "..\..\img"
+# Path to the image of the logo 64x64 px
+
+#--------------------------------------------------------------------------------
+[OUTPUT]
+#--------------------------------------------------------------------------------
+
+# Base dir that is going to store the ouput data files
+out_dir = "out"
+# Prefix ("name") to add to the output (can contain special keywords / subfolders)
+out_prefix = "LISAG TAD1_NM"
+# Current run number, when empty it will be automatically updated to avoid overwrite
+# the run_counter value is added as a 3 digit number to the output file name (after the prefix)
+# WARNING: when set it will be used, and can cause overwrites
+run_counter = 
+
+# Flag to export positions results
+flag_out_position = 1
+# Flag to export the used settings as ini file
+flag_out_settings = 0
+# Flag to write the PDF report
+flag_out_pdf_report = 0
+# Flag to export PDF troposphere results (when available)
+flag_out_pdf_tropo = 0
+# Flag to write the PDF of the code residuals
+flag_out_pdf_code_res = 0
+# Flag to write the PDF of the phase residuals
+flag_out_pdf_ph_res = 0
+# Flag to write the PDF of the estimated dt
+flag_out_pdf_dt = 0
+# Flag to export the object that coputed the block solution (if computed)
+flag_out_block_obj = 0
+# Flag to export the KML file (when expected)
+flag_out_kml = 0
+# Flag to export the NMEA file (when expected)
+flag_out_nmea = 0

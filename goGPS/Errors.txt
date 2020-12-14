@@ -1,0 +1,115 @@
+Reference to non-existent field 'lIono'.
+
+Error in goGUIclass/initIonoModel (line 544)
+            set(this.goh.lIono, 'String', str);
+
+Error in goGUIclass/initPopUps (line 363)
+            this.initIonoModel(this.strIonoModel, 3);
+
+Error in goGUIclass/init (line 255)
+            this.initPopUps();
+
+Error in goGUIclass (line 231)
+            this.init(handles)
+
+Error in gui_goGPS>gui_goGPS_OpeningFcn (line 87)
+goGUI = goGUIclass(handles);
+
+Error in gui_mainfcn (line 220)
+    feval(gui_State.gui_OpeningFcn, gui_hFigure, [], guidata(gui_hFigure), varargin{:});
+
+Error in gui_goGPS (line 71)
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+
+Error in goGPS (line 129)
+    [ok_go] = gui_goGPS;
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+Reference to non-existent field 'text_iono'.
+
+Error in goGUIclass/initUIids (line 1024)
+            i=i+1; id.tIono          = i;    id2h(i) = this.goh.text_iono;
+
+Error in goGUIclass/initInterface (line 1537)
+            this.initUIids();
+
+Error in goGUIclass/init (line 282)
+            this.initInterface();
+
+Error in goGUIclass (line 231)
+            this.init(handles)
+
+Error in gui_goGPS>gui_goGPS_OpeningFcn (line 87)
+goGUI = goGUIclass(handles);
+
+Error in gui_mainfcn (line 220)
+    feval(gui_State.gui_OpeningFcn, gui_hFigure, [], guidata(gui_hFigure), varargin{:});
+
+Error in gui_goGPS (line 71)
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+
+Error in goGPS (line 129)
+    [ok_go] = gui_goGPS;
+
+------------------------------------------------------------------------------------------------------------------------------------------
+Reference to non-existent field 'lTropo'.
+
+Error in goGUIclass/initUIids (line 1027)
+            i=i+1; id.lTropo         = i;    id2h(i) = this.goh.lTropo;
+
+Error in goGUIclass/initInterface (line 1537)
+            this.initUIids();
+
+Error in goGUIclass/init (line 282)
+            this.initInterface();
+
+Error in goGUIclass (line 231)
+            this.init(handles)
+
+Error in gui_goGPS>gui_goGPS_OpeningFcn (line 87)
+goGUI = goGUIclass(handles);
+
+Error in gui_mainfcn (line 220)
+    feval(gui_State.gui_OpeningFcn, gui_hFigure, [], guidata(gui_hFigure), varargin{:});
+
+Error in gui_goGPS (line 71)
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+
+Error in goGPS (line 129)
+    [ok_go] = gui_goGPS;
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+No appropriate method, property, or field 'tropo_model' for class 'Main_Settings'.
+
+Error in Go_State/settingsToGo (line 401)
+            varargout{29} = state.tropo_model;      % tropo
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+Reference to non-existent field 'lIono'.
+
+Error in goGUIclass/initIonoModel (line 477)
+            set(this.goh.lIono, 'String', str);
+
+Error in goGUIclass/initPopUps (line 355)
+            this.initIonoModel(this.strIonoModel, 3);
+
+Error in goGUIclass/init (line 248)
+            this.initPopUps();
+
+Error in goGUIclass (line 224)
+            this.init(handles);
+
+Error in gui_goGPS>gui_goGPS_OpeningFcn (line 87)
+goGUI = goGUIclass(handles);
+
+Error in gui_mainfcn (line 220)
+    feval(gui_State.gui_OpeningFcn, gui_hFigure, [], guidata(gui_hFigure), varargin{:});
+
+Error in gui_goGPS (line 71)
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+
+Error in goGPS (line 129)
+    [ok_go] = gui_goGPS;
+
